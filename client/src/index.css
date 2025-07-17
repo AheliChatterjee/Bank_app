@@ -1,0 +1,128 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark; /* This line is crucial for browser dark mode detection */
+
+  /* --- NEW COLOR PALETTE --- */
+  /* Primary Brand Color */
+  --color-primary: #875cf5; /* Vibrant Purple (from your earlier context, good choice!) */
+  --color-primary-dark: #6e4bc2; /* Darker shade for hover/active */
+  --color-primary-light: #a68bf7; /* Lighter shade for subtle backgrounds/gradients */
+
+  /* Accent Colors */
+  --color-accent-blue: #007bff;   /* A classic bright blue */
+  --color-accent-green: #28a745;  /* For success messages/positive actions */
+  --color-accent-orange: #ffc107; /* For warnings/highlights */
+
+  /* Neutral Colors (for text and backgrounds) */
+  --text-color-dark: #213547; /* Dark text for light backgrounds */
+  --text-color-light: rgba(255, 255, 255, 0.95); /* Light text for dark backgrounds, slightly more opaque */
+  --bg-color-dark: #1a1a1a;   /* Dark background, slightly lighter than #242424 for depth */
+  --bg-color-light: #f0f2f5;  /* Very light grey/off-white for light mode background */
+  --border-color-neutral: #e0e0e0; /* Light border for elements */
+
+  /* Specific Component Colors */
+  --link-default-color: #646cff; /* Original link color, kept for familiarity */
+  --link-hover-color-light: #535bf2; /* Original link hover for light, slightly adjusted */
+  --link-hover-color-dark: #9daafc; /* Lighter hover for dark mode for better visibility */
+
+  --button-bg-dark: #3a3a3a; /* Dark button background */
+  --button-bg-light: #e0e0e0; /* Light button background */
+
+  /* --- APPLYING DEFAULT (DARK MODE) COLORS --- */
+  color: var(--text-color-light); /* Default text color for dark mode */
+  background-color: var(--bg-color-dark); /* Default background color for dark mode */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- GLOBAL STYLES --- */
+a {
+  font-weight: 500;
+  color: var(--link-default-color); /* Use variable for link color */
+  text-decoration: none; /* Often preferred to remove default underline and add on hover */
+  transition: color 0.25s ease; /* Smooth transition for color change */
+}
+a:hover {
+  color: var(--link-hover-color-dark); /* Hover color for dark mode by default */
+  text-decoration: underline; /* Add underline on hover */
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center; /* Centers content horizontally and vertically within the body */
+  min-width: 320px;
+  min-height: 100vh;
+  padding: 1rem; /* Add some padding around the main content */
+  box-sizing: border-box; /* Include padding in element's total width and height */
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  color: var(--color-primary); /* Make h1 vibrant with your primary color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Subtle text shadow for depth */
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid var(--color-primary); /* Use primary color for border by default */
+  padding: 0.8em 1.5em; /* Slightly more generous padding */
+  font-size: 1.05em; /* Slightly larger text */
+  font-weight: 600; /* Bolder text for buttons */
+  font-family: inherit;
+  background-color: var(--color-primary); /* Primary color background */
+  color: white; /* White text on primary background */
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, transform 0.1s ease; /* Smooth transitions for multiple properties */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
+}
+button:hover {
+  background-color: var(--color-primary-dark); /* Darker primary on hover */
+  border-color: var(--color-primary-dark);
+  transform: translateY(-2px); /* Slight lift effect on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Slightly larger shadow on hover */
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto var(--color-accent-blue); /* Use an accent color for focus outline */
+  outline-offset: 2px; /* Add some space between button and outline */
+}
+
+/* --- LIGHT MODE ADJUSTMENTS --- */
+@media (prefers-color-scheme: light) {
+  :root {
+    color: var(--text-color-dark); /* Dark text for light mode */
+    background-color: var(--bg-color-light); /* Light background for light mode */
+  }
+
+  a {
+    color: var(--link-default-color); /* Maintain default link color */
+  }
+  a:hover {
+    color: var(--link-hover-color-light); /* Lighter hover color for light mode */
+  }
+
+  h1 {
+    color: var(--color-primary-dark); /* Darker primary for headings in light mode */
+    text-shadow: none; /* Remove text shadow in light mode if preferred, or adjust color */
+  }
+
+  button {
+    background-color: var(--color-primary); /* Keep primary color for buttons in light mode too */
+    color: white;
+    border: 1px solid var(--color-primary);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  button:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+}
