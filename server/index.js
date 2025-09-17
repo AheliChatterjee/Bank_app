@@ -5,9 +5,11 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-// Import routes
+// Import routes (all with require)
 const authRoutes = require("./routes/auth");
 const bankRoutes = require("./routes/bank");
+const fundRoutes = require("./routes/fund");   // remove .js if using require
+const loanRoutes = require("./routes/loan");
 
 const app = express();
 
@@ -17,7 +19,9 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
-app.use("/api/bank", bankRoutes); // <- This route must exist (we'll add it later)
+app.use("/api/bank", bankRoutes); 
+app.use("/api/fund", fundRoutes);
+app.use("/api/loan", loanRoutes);
 
 // Test route
 app.get("/", (req, res) => res.send("API is running"));
@@ -26,5 +30,6 @@ app.get("/", (req, res) => res.send("API is running"));
 mongoose.connect(process.env.MONGO_URI)
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.error("❌ MongoDB connection error:", err));
-  const PORT = process.env.PORT || 5000;
+
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
