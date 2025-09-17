@@ -32,7 +32,7 @@ exports.createAccount = async (req, res) => {
 
     await account.save();
 
-    // Optional: Link account to user if needed
+// Optional: Link account to user if needed
     await User.findByIdAndUpdate(req.userId, {
       $push: { accounts: account._id },
     });

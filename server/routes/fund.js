@@ -6,6 +6,7 @@ const router = express.Router();
 
 // ✅ Create a fund entry (Share or Thrift)
 router.post('/:type', requireAuth, async (req, res) => {
+    
     const { amount } = req.body;
     const { type } = req.params;
 
