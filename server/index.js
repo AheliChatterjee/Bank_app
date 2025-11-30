@@ -8,8 +8,8 @@ const cors = require("cors");
 // Import routes (all with require)
 const authRoutes = require("./routes/auth");
 const bankRoutes = require("./routes/bank");
-const fundRoutes = require("./routes/fund");   // remove .js if using require
-const loanRoutes = require("./routes/loan");
+const fundRoutes = require("./routes/fundRoutes");   // remove .js if using require
+
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/bank", bankRoutes); 
 app.use("/api/fund", fundRoutes);
-app.use("/api/loan", loanRoutes);
+
 
 // Test route
 app.get("/", (req, res) => res.send("API is running"));

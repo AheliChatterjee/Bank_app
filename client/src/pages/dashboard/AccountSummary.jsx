@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import "./AccountSummary.css";
 
 const AccountSummary = ({ data }) => {
   const navigate = useNavigate();
@@ -12,17 +13,18 @@ const AccountSummary = ({ data }) => {
   ];
 
   return (
-    <div className="bg-white shadow p-6 rounded mb-6">
-      <h2 className="text-2xl font-semibold mb-4">Account Summary</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <div className="summary-card">
+      <h2 className="summary-title">Account Summary</h2>
+
+      <div className="summary-grid">
         {summaryItems.map((item) => (
           <div
             key={item.key}
-            className="bg-blue-100 hover:bg-blue-200 cursor-pointer p-4 rounded shadow-md transition"
+            className="summary-box"
             onClick={() => navigate(item.path)}
           >
-            <h3 className="text-lg font-semibold">{item.label}</h3>
-            <p className="text-xl font-bold text-blue-800 mt-2">
+            <h3 className="summary-label">{item.label}</h3>
+            <p className="summary-value">
               ₹{data?.[item.key]?.toLocaleString("en-IN") || "0.00"}
             </p>
           </div>

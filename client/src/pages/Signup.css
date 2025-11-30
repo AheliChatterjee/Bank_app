@@ -1,0 +1,87 @@
+/* styles/Signup.css */
+
+body {
+  background: #f7f8fa;
+  font-family: 'Inter', sans-serif;
+}
+
+.signup-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup-card {
+  background: #f0f0f5;
+  padding: 3rem 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.signup-card h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: #1f1f1f;
+}
+
+.signup-input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.signup-input:focus {
+  border-color: #9b5de5;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(155, 93, 229, 0.25);
+}
+
+.signup-btn {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: linear-gradient(90deg, #9b5de5, #7b2cbf);
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.signup-btn:hover {
+  background: linear-gradient(90deg, #7b2cbf, #9b5de5);
+}
+
+.signup-footer {
+  margin-top: 1.8rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.signup-footer button {
+  background: none;
+  border: none;
+  color: #7b2cbf;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.signup-footer button:hover {
+  color: #9b5de5;
+}
+
+.error-text {
+  color: red;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}

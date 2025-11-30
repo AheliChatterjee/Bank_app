@@ -4,6 +4,8 @@ import AccountSummary from "./AccountSummary";
 import api from "../../utils/api";
 import { useNavigate } from "react-router-dom";
 
+import "./Dashboard.css";
+
 const Dashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
@@ -28,24 +30,23 @@ const Dashboard = () => {
   }, []);
 
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">
+    <div className="dashboard-page">
+      <div className="dashboard-header">
+        <h1>
           Welcome, {user?.name || user?.email || "User"}
         </h1>
-        <button
-          onClick={logout}
-          className=" bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-        >
+        <button onClick={logout} className="logout-btn">
           Logout
         </button>
       </div>
 
-      {bankData ? (
-        <AccountSummary data={bankData} />
-      ) : (
-        <p className="text-gray-600">Loading account summary...</p>
-      )}
+      <div className="dashboard-content">
+        {bankData ? (
+          <AccountSummary data={bankData} />
+        ) : (
+          <p className="loading-text">Loading account summary...</p>
+        )}
+      </div>
     </div>
   );
 };
