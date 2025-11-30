@@ -1,8 +1,32 @@
-import React from "react";
+import { useState, useEffect } from "react";
+
+import api from "../../utils/api";
 import "./FundPage.css";
 
 const ShareFund = () => {
-  return (
+    const [total, setTotal] = useState(0);
+  const [history, setHistory] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadShareFund();
+  }, []);
+
+  const loadShareFund = async () => {
+    try {
+      const res = await api.get("/fund/share");
+      setTotal(res.data.total);
+      setHistory(res.data.history);
+    } catch (err) {
+      console.error("Error loading share fund:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) return <p className="loading-text">Loading Share Fund...</p>;
+  
+ return (
     <div className="fund-page">
       <div className="fund-header">
         <h1>Share Fund</h1>
@@ -10,23 +34,26 @@ const ShareFund = () => {
 
       <div className="fund-summary">
         <h2>Total Share Fund</h2>
-        <p>₹0.00</p>
+        <p>₹{total.toLocaleString("en-IN")}</p>
       </div>
 
       <div className="history-card">
         <h3 className="history-title">Monthly Log</h3>
-
         <div className="history-list">
-          {/* Dummy items — replace with real data later */}
-          <div className="history-item">
-            <span>January 2025</span>
-            <span className="amount-positive">+ ₹500</span>
-          </div>
-
-          <div className="history-item">
-            <span>December 2024</span>
-            <span className="amount-negative">- ₹300</span>
-          </div>
+          {history.map((item, index) => (
+            <div key={index} className="history-item">
+              <span>{item.month}</span>
+              <span>
+                <span className="amount-positive">
+                  + ₹{item.incoming.toLocaleString("en-IN")}
+                </span>{" "}
+                /{" "}
+                <span className="amount-negative">
+                  {item.outgoing.toLocaleString("en-IN")}
+                </span>
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

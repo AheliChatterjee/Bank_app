@@ -1,7 +1,33 @@
-import React from "react";
+import { useState, useEffect } from "react";
+
+import api from "../../utils/api";
 import "./FundPage.css";
 
 const MTLoan = () => {
+  const [loans, setLoans] = useState([]);
+  const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    loadLoanData();
+  }, []);
+
+  const loadLoanData = async () => {
+    try {
+      const res = await api.get("/fund/mt");
+      setLoans(res.data.loans);
+      setLogs(res.data.logs);
+    } catch (err) {
+      console.error("MT Loan Load Error:", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) return <p className="loading-text">Loading MT Loan...</p>;
+
+  const loan = loans.length > 0 ? loans[0] : null;
+
   return (
     <div className="fund-page">
       <div className="fund-header">
@@ -9,23 +35,26 @@ const MTLoan = () => {
       </div>
 
       <div className="fund-summary">
-        <h2>Total MT Loan Due</h2>
-        <p>₹0.00</p>
+        <h2>Remaining MT Loan Due</h2>
+        <p>₹{loan?.remainingAmount?.toLocaleString("en-IN") || "0"}</p>
       </div>
 
       <div className="history-card">
         <h3 className="history-title">Monthly EMI Log</h3>
 
         <div className="history-list">
-          <div className="history-item">
-            <span>January 2025</span>
-            <span className="amount-negative">- ₹1200</span>
-          </div>
-
-          <div className="history-item">
-            <span>December 2024</span>
-            <span className="amount-negative">- ₹1200</span>
-          </div>
+          {logs.map((item, index) => (
+            <div key={index} className="history-item">
+              <span>{item.month}</span>
+              <span
+                className={
+                  item.status === "paid" ? "amount-negative" : "amount-positive"
+                }
+              >
+                ₹{item.emiAmount}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
